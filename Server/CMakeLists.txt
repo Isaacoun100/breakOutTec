@@ -3,4 +3,4 @@ project(Server C)
 
 set(CMAKE_C_STANDARD 17)
 
-add_executable(Server main.c)
+add_executable(Server main.c Sockets/connection.c Sockets/connection.h JSON/format.c JSON/format.h Interface/commandInteraction.c Interface/commandInteraction.h)

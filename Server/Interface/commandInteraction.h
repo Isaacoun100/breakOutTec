@@ -1,0 +1,8 @@
+//
+// Created by arch-desktop on 01/06/22.
+//
+
+#ifndef SERVER_COMMANDINTERACTION_H
+#define SERVER_COMMANDINTERACTION_H
+
+#endif //SERVER_COMMANDINTERACTION_H
