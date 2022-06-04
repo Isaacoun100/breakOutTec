@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include "Sockets/connectionServer.h"
 
 int main() {
-    printf("Hello, World!\n");
+    startConnection();
     return 0;
 }
