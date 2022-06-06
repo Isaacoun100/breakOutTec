@@ -8,7 +8,7 @@ int addrlen = sizeof(address),
 
 int startConnection(){
 
-    char* hello = "Hello from server";
+    char* hello = "Successfully connected to the server";
 
     printf("Please indicate the port you want to create the communication\n");
     scanf("%d", &PORT);
@@ -50,6 +50,7 @@ int startConnection(){
     }
 
     sendMessage(hello);
+    receiveMessages();
 
     close(new_socket);
     shutdown(server_fd, SHUT_RDWR);

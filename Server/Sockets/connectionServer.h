@@ -11,6 +11,6 @@
 
 extern int startConnection();
 void receiveMessages();
-void sendMessage(char* message);
+extern void sendMessage(char* message);
 
 #endif //SERVER_CONNECTIONSERVER_H
