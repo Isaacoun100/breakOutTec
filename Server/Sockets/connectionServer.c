@@ -6,13 +6,9 @@ int addrlen = sizeof(address),
         new_socket, server_fd,
         opt = 1, valread, PORT;
 
-int startConnection(){
+int startConnection(int PORT){
 
     char* hello = "Successfully connected to the server";
-
-    printf("Please indicate the port you want to create the communication\n");
-    scanf("%d", &PORT);
-    printf("Connecting with the port %d , please wait \n", PORT);
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {

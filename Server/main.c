@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "Sockets/connectionServer.h"
+#include "Interface/commandInteraction.h"
 
 int main() {
-    startConnection();
+    startConsole();
     return 0;
 }

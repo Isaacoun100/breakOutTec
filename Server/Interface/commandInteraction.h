@@ -1,8 +1,13 @@
-//
-// Created by arch-desktop on 01/06/22.
-//
+
+#include <stdbool.h>
+#include <string.h>
+#include <stdio.h>
+#include <ctype.h>
 
 #ifndef SERVER_COMMANDINTERACTION_H
 #define SERVER_COMMANDINTERACTION_H
 
-#endif //SERVER_COMMANDINTERACTION_H
+extern int startConsole();
+int isNumber(char s[]);
+
+#endif
