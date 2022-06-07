@@ -226,19 +226,3 @@ int startConsole(){
 
     return 0;
 }
-
-/**
- * This function checks if the given input is a number or not
- * Credits to https://www.codegrepper.com/code-examples/c/how+to+check+if+a+string+is+a+number+c
- * @param s Char to check
- * @return 1 if the Char only contains numbers, 0 if it doesn't
- */
-int isNumber(char s[])
-{
-    for (int i = 0; s[i]!= '\0'; i++)
-    {
-        if (isdigit(s[i]) == 0) return 0;
-    }
-
-    return 1;
-}
