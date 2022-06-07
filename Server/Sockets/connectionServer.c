@@ -10,6 +10,10 @@ int startConnection(int PORT){
 
     char* hello = "Successfully connected to the server";
 
+    printf("Please indicate the port you want to create the communication\n");
+    scanf("%d", &PORT);
+    printf("Connecting with the port %d , please wait \n", PORT);
+
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
         perror("couldn't create the file descriptor");
