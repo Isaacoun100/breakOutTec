@@ -5,29 +5,29 @@ struct Brick{
     int yValue;
 };
 
-union gameDetails{
+struct gameDetails{
 
-    int greenValue,         // Value of the Green Brick
-    yellowValue,        // Value of the Yellow Brick
-    orangeValue,        // Value of the Orange Brick
-    redValue;           // Value of the Red Brick
+    int greenValue;         // Value of the Green Brick
+    int yellowValue;        // Value of the Yellow Brick
+    int orangeValue;        // Value of the Orange Brick
+    int redValue;           // Value of the Red Brick
 
-    struct Brick lifePoints,    // Position of the extra life points brick
-    extraBall,          // Position of the extra ball brick
-    doubleRacket,       // Position of the double racket brick
-    halfRacket,         // Position of the half racket brick
-    moreSpeed,          // Position of the more speed brick
-    lessSpeed;          // Position of the less speed brick
+    struct Brick lifePoints;    // Position of the extra life points brick
+    struct Brick extraBall;          // Position of the extra ball brick
+    struct Brick doubleRacket;       // Position of the double racket brick
+    struct Brick halfRacket;         // Position of the half racket brick
+    struct Brick moreSpeed;          // Position of the more speed brick
+    struct Brick lessSpeed;          // Position of the less speed brick
 
 };
 
 int startConsole(){
 
     int newValue,PORT = 6969; // Default server port if none was indicated
-    bool validPORT, isFirst;
+    bool isFirst;
     char command[128];
 
-    union gameDetails newGame;
+    struct gameDetails newGame;
 
     //Default brick values
     newGame.greenValue = 5;
@@ -49,7 +49,11 @@ int startConsole(){
     newGame.halfRacket.yValue = 7;
 
     newGame.moreSpeed.xValue = 4;
+    newGame.moreSpeed.yValue = 7;
+
+    newGame.lessSpeed.xValue = 5;
     newGame.lessSpeed.yValue = 7;
+
 
 
     const char *instructions =
@@ -100,9 +104,17 @@ int startConsole(){
         }
         else if(strcmp(command,"ChangeOrangeBrick")==0){
 
-            printf("%s Orange Brick", brickValue);
+            printf("%s Orange Brick: ", brickValue);
             scanf("%d", &newValue);
             newGame.orangeValue = newValue;
+
+        }
+
+        else if(strcmp(command,"ChangeRedBrick")==0){
+
+            printf("%s Red Brick: ", brickValue);
+            scanf("%d", &newValue);
+            newGame.redValue = newValue;
 
         }
         else if(strcmp(command,"BrickLifePoints")==0){
