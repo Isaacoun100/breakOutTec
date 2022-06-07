@@ -8,6 +8,5 @@
 #define SERVER_COMMANDINTERACTION_H
 
 extern int startConsole();
-int isNumber(char s[]);
 
 #endif
