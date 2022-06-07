@@ -25,7 +25,7 @@ int startConsole(){
 
     int newValue,PORT = 6969; // Default server port if none was indicated
     bool validPORT, isFirst;
-    char command[1024];
+    char command[128];
 
     union gameDetails newGame;
 
@@ -49,7 +49,7 @@ int startConsole(){
     newGame.halfRacket.yValue = 7;
 
     newGame.moreSpeed.xValue = 4;
-    newGame.lessSpeed.yValue = 7
+    newGame.lessSpeed.yValue = 7;
 
 
     const char *instructions =
@@ -65,7 +65,7 @@ int startConsole(){
                 "FasterBrick         →   To add a more speed bonus\n"
                 "SlowerBrick         →   To add a less speed bonus\n"
                 "Send                →   To send the data and start the game \n"
-                "GameInfo            →   Retrieves the data of the current game \n"
+                "Status              →   Retrieves the data of the current game \n"
                 "Help                →   To read the instructions again \n" ,
 
                 *portInput = "Please specify the port you want the server to be hosted in \n"
@@ -170,6 +170,29 @@ int startConsole(){
             newGame.lessSpeed.yValue = newValue;
 
         }
+
+        else if(strcmp(command,"Status")==0){
+            printf("Game will be hosted in the port: %d \n"
+                   "The value for the green brick is: %d \n"
+                   "The value for the yellow brick is: %d \n"
+                   "The value for the orange brick is: %d \n"
+                   "The value for the red brick is: %d \n"
+                   "The life point brick is in [ %d , %d ] \n"
+                   "The extra ball brick is in [ %d , %d ] \n"
+                   "The double racket brick is in [ %d , %d ] \n"
+                   "The half racket brick is in [ %d , %d ] \n"
+                   "The faster ball brick is in [ %d , %d ] \n"
+                   "The slower ball is in [ %d , %d ] \n"
+                   ,PORT, newGame.greenValue,newGame.yellowValue
+                   ,newGame.orangeValue ,newGame.redValue
+                   ,newGame.lifePoints.xValue, newGame.lifePoints.yValue
+                   ,newGame.extraBall.xValue, newGame.extraBall.yValue
+                   ,newGame.doubleRacket.xValue, newGame.doubleRacket.yValue
+                   ,newGame.halfRacket.xValue, newGame.halfRacket.yValue
+                   ,newGame.moreSpeed.xValue, newGame.moreSpeed.yValue
+                   ,newGame.lessSpeed.xValue, newGame.lessSpeed.yValue);
+        }
+
         else if(strcmp(command,"Send")==0){
             isFirst=false;
 
