@@ -1,5 +1,7 @@
 #include "commandInteraction.h"
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "LocalValueEscapesScope"
 struct Brick{
     int xValue;
     int yValue;
@@ -12,7 +14,7 @@ struct gameDetails{
     int orangeValue;        // Value of the Orange Brick
     int redValue;           // Value of the Red Brick
 
-    struct Brick lifePoints;    // Position of the extra life points brick
+    struct Brick lifePoints;         // Position of the extra life points brick
     struct Brick extraBall;          // Position of the extra ball brick
     struct Brick doubleRacket;       // Position of the double racket brick
     struct Brick halfRacket;         // Position of the half racket brick
@@ -20,6 +22,39 @@ struct gameDetails{
     struct Brick lessSpeed;          // Position of the less speed brick
 
 };
+
+/* It will receive the struct newGame and convert it into JSON, no library should be required, it is just string
+ * management as we need no library, the JSON can be easily created and manipulated. Plus the JSON that sends the
+ * game is just a simple string that is passed to the observer, therefore is not necessary.
+ */
+const char* convertJSON(struct gameDetails newGame){
+
+    char JSON[512];
+
+    sprintf(JSON, "{\n"
+                  "    \"greenValue\": %d,\n"
+                  "    \"yellowValue\": %d,\n"
+                  "    \"orangeValue\": %d,\n"
+                  "    \"redValue\": %d,\n"
+                  "    \"lifePoints\":[%d,%d],\n"
+                  "    \"extraValue\":[%d,%d],\n"
+                  "    \"doubleRacket\":[%d,%d],\n"
+                  "    \"halfRacket\":[%d,%d],\n"
+                  "    \"moreSpeed\":[%d,%d],\n"
+                  "    \"lessSpeed\":[%d,%d]\n"
+                  "}",
+                  newGame.greenValue, newGame.yellowValue,
+                  newGame.orangeValue, newGame.redValue,
+                  newGame.lifePoints.xValue, newGame.lifePoints.yValue,
+                  newGame.extraBall.xValue,newGame.extraBall.yValue,
+                  newGame.doubleRacket.xValue, newGame.doubleRacket.yValue,
+                  newGame.halfRacket.xValue, newGame.halfRacket.yValue,
+                  newGame.moreSpeed.xValue, newGame.moreSpeed.yValue,
+                  newGame.lessSpeed.xValue, newGame.lessSpeed.yValue);
+
+    char* result = JSON;
+    return result;
+}
 
 int startConsole(){
 
@@ -208,6 +243,8 @@ int startConsole(){
         else if(strcmp(command,"Send")==0){
             isFirst=false;
 
+            printf("%s \n", convertJSON(newGame));
+
             while(!isFirst){
                 printf("%s",portInput);
                 scanf("%d", &PORT);
@@ -220,6 +257,8 @@ int startConsole(){
         }
         else if(strcmp(command,"Help")==0)
             printf("%s", instructions);
+        else if(strcmp(command, "Exit")==0)
+            break;
         else
             printf("Sorry, command not found \n");
     }
