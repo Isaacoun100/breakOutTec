@@ -1,0 +1,13 @@
+{
+  "greenValue": 5,
+  "yellowValue": 10,
+  "orangeValue": 15,
+  "redValue": 20,
+  "lifePoints":[0,7],
+  "extraValue":[1,7],
+  "doubleRacket":[2,7],
+  "halfRacket":[3,7],
+  "moreSpeed":[4,7],
+  "lessSpeed":[5,7]
+}
+
