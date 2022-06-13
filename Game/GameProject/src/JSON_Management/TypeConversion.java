@@ -4,6 +4,8 @@ import Objects.Brick;
 import Objects.GameDetails;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 
 public class TypeConversion {
@@ -47,12 +49,18 @@ public class TypeConversion {
 
         while (count < size){
             if (count ==0){
-                brickObject.setxValue((Integer)(jsonArray.get(count)));
+                brickObject.setxValue(((Long)jsonArray.get(count)).intValue());
             }else {
-                brickObject.setyValue((Integer)(jsonArray.get(count)));
+                brickObject.setyValue(((Long)jsonArray.get(count)).intValue());
             }
             count++;
         }
+    }
+    public static JSONObject stringToJSONObject(String jsonString) throws ParseException {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonString);
+
+        return jsonObject;
     }
 }
 
