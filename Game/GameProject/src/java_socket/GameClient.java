@@ -4,12 +4,12 @@ import java.net.*;
 import java.io.*;
 
 
-public class GameClient {
+public class GameClient extends Thread{
     public Socket socket;
     public DataInputStream inputBuffer;
     public DataOutputStream outputBuffer;
 
-    public GameClient() {
+    public void run(){
         try {
             //Socket is created
             socket = new Socket("localhost", 25557);
@@ -19,6 +19,8 @@ public class GameClient {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public GameClient() {
 
     }
 

@@ -1,5 +1,7 @@
 package game_interface;
 
+import java_socket.GameClient;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Color;
@@ -30,12 +32,10 @@ public class Board extends JPanel{
     private int level = 1;
     private ArrayList<Ball> balls;
 
-
-
+    private final GameClient gameClient = new GameClient();
 
 
     public Board() {
-
         initBoard();
     }
 
@@ -44,7 +44,7 @@ public class Board extends JPanel{
         addKeyListener(new TAdapter());
         setFocusable(true);
         setPreferredSize(new Dimension(Commons.WIDTH, Commons.HEIGHT));
-
+        gameClient.start();
         gameInit();
     }
 
@@ -122,6 +122,8 @@ public class Board extends JPanel{
         g2d.drawString("Level: " + String.valueOf(level), (Commons.WIDTH - fontMetrics.stringWidth(String.valueOf(level)))/5, 20);
     }
 
+
+
     private class TAdapter extends KeyAdapter{
         @Override
         public void keyReleased(KeyEvent e){
@@ -154,7 +156,6 @@ public class Board extends JPanel{
         inGame = false;
         timer.stop();
     }
-
     private void checkCollision(){
         for(int i = 0; i < balls.size(); i++){
             if(balls.get(i).getRectangle().getMaxY() > Commons.BOTTOM_EDGE){
