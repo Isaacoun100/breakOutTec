@@ -4,15 +4,11 @@
 struct sockaddr_in address;
 int addrlen = sizeof(address),
         new_socket, server_fd,
-        opt = 1, valread, PORT;
+        opt = 1, valread, PORT=6969;
 
-int startConnection(int PORT){
+char buffer[1024] = { 0 };
 
-    char* hello = "Successfully connected to the server";
-
-    printf("Please indicate the port you want to create the communication\n");
-    scanf("%d", &PORT);
-    printf("Connecting with the port %d , please wait \n", PORT);
+int startConnection(){
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -49,23 +45,19 @@ int startConnection(int PORT){
         return 1;
     }
 
-    sendMessage(hello);
-    receiveMessages();
-
-    close(new_socket);
-    shutdown(server_fd, SHUT_RDWR);
     return 0;
 }
 
-void receiveMessages(){
-    char buffer[1024] = { 0 };
-
-    while(strcmp(buffer,"EXIT\n")!=0){
-        valread = read(new_socket, buffer, 1024);
-        printf("%s", buffer);
-    }
+const char* receiveMessages(){
+    valread = read(new_socket, buffer, 1024);
+    return buffer;
 }
 
 void sendMessage(char* message){
     send(new_socket, message, strlen(message), 0);
+}
+
+void stopConnection(){
+    close(new_socket);
+    shutdown(server_fd, SHUT_RDWR);
 }

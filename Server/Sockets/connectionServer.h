@@ -9,8 +9,9 @@
 #ifndef SERVER_CONNECTIONSERVER_H
 #define SERVER_CONNECTIONSERVER_H
 
-extern int startConnection();
-void receiveMessages();
 extern void sendMessage(char* message);
+extern int startConnection();
+const char* receiveMessages();
+void stopConnection();
 
 #endif //SERVER_CONNECTIONSERVER_H
