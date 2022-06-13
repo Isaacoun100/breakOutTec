@@ -1,5 +1,8 @@
 
+#include "../Sockets/connectionServer.h"
+#include "../Sockets/connectionObserver.h"
 #include <stdbool.h>
+#include <pthread.h>
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>

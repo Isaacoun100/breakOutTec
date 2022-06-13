@@ -1,7 +1,5 @@
 #include "commandInteraction.h"
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "LocalValueEscapesScope"
 struct Brick{
     int xValue;
     int yValue;
@@ -59,7 +57,7 @@ const char* convertJSON(struct gameDetails newGame){
 int startConsole(){
 
     int newValue,PORT = 6969; // Default server port if none was indicated
-    bool isFirst;
+    bool isFirst, hasStarted, isObserving;
     char command[128];
 
     struct gameDetails newGame;
@@ -104,11 +102,10 @@ int startConsole(){
                 "FasterBrick         →   To add a more speed bonus\n"
                 "SlowerBrick         →   To add a less speed bonus\n"
                 "Send                →   To send the data and start the game \n"
+                "Observer            →   Starts the connection with the Observer\n"
                 "Status              →   Retrieves the data of the current game \n"
                 "Help                →   To read the instructions again \n" ,
 
-                *portInput = "Please specify the port you want the server to be hosted in \n"
-                             "the port must be over 1024, if none specified 6969 will be selected \n" "PORT: ",
                 *brickValue = "Please indicate the new value of the brick \n" "New Value for the ",
                 *bonusBrickX = "Please indicate the x coordinate value for the bonus \n"
                               "Value must be in the range of 0 and 13 \n" "X coordinate: ",
@@ -240,25 +237,40 @@ int startConsole(){
                    ,newGame.lessSpeed.xValue, newGame.lessSpeed.yValue);
         }
 
-        else if(strcmp(command,"Send")==0){
-            isFirst=false;
+        else if(strcmp(command,"Observer")==0){
 
-            printf("%s \n", convertJSON(newGame));
-
-            while(!isFirst){
-                printf("%s",portInput);
-                scanf("%d", &PORT);
-                if(PORT>1024)
-                    isFirst=true;
-
+            if(isObserving)
+                printf("The observer is active\n");
+            else if(!hasStarted)
+                printf("Please send the server settings before starting the observer");
+            else{
+                pthread_t thread_id;
+                pthread_create(&thread_id, NULL, startConversation, NULL);
             }
-
-            printf("The game server will be hosted in %d \n", PORT);
         }
+
+        else if(strcmp(command,"Send")==0){
+
+            char* settings = convertJSON(newGame);
+
+            if(!isFirst){
+                printf("The game server will be hosted in 6969\n%s\n",settings);
+                startConnection();
+                sleep(1);
+                sendMessage(settings);
+                isFirst=hasStarted=true;
+            }
+            else{
+                printf("%s \n",settings);
+                sendMessage(settings);
+            }
+        }
+
+
         else if(strcmp(command,"Help")==0)
             printf("%s", instructions);
         else if(strcmp(command, "Exit")==0)
-            break;
+            stopConnection();
         else
             printf("Sorry, command not found \n");
     }
