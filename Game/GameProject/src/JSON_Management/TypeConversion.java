@@ -58,9 +58,8 @@ public class TypeConversion {
     }
     public static JSONObject stringToJSONObject(String jsonString) throws ParseException {
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonString);
 
-        return jsonObject;
+        return (JSONObject) jsonParser.parse(jsonString);
     }
 }
 

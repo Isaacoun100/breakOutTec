@@ -79,4 +79,20 @@ public class GameDetails {
     public Brick getLessSpeed() {
         return lessSpeed;
     }
+
+    @Override
+    public String toString() {
+        return "GameDetails{" +
+                "greenValue=" + greenValue +
+                ", yellowValue=" + yellowValue +
+                ", orangeValue=" + orangeValue +
+                ", redValue=" + redValue +
+                ", lifepoints=" + lifepoints +
+                ", extraBall=" + extraBall +
+                ", doubleRacket=" + doubleRacket +
+                ", halfRacket=" + halfRacket +
+                ", moreSpeed=" + moreSpeed +
+                ", lessSpeed=" + lessSpeed +
+                '}';
+    }
 }
