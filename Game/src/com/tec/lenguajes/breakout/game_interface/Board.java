@@ -54,7 +54,7 @@ public class Board extends JPanel{
         paddle = new Paddle();
         balls = new ArrayList<Ball>();
         balls.add(ball);
-        
+
 
         int k = 0;
         for(int i = 0; i < 8; i++){

@@ -9,6 +9,7 @@ public class Brick extends Sprite{
     private int row;
     private int column;
     private String powerUp;
+    private int points;
 
     public Brick(int x, int y,int row,int column){
         initBrick(x,y,row,column);
@@ -19,6 +20,7 @@ public class Brick extends Sprite{
         this.y = y;
         this.row = row;
         this.column = column;
+        this.points = 0;
         destroyed = false;
         loadImage();
         getImageDimensions();
@@ -98,5 +100,13 @@ public class Brick extends Sprite{
 
     public void setPowerUp(String powerUp) {
         this.powerUp = powerUp;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
