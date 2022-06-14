@@ -3,14 +3,22 @@ package game_interface;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
+/**
+ * Paddle class that applies inheritance to the sprite superclass to make a paddle for controlling the game
+ */
 public class Paddle extends Sprite{
 
     private int dx;
+
 
     public Paddle(){
         initPaddle();
     }
 
+    /**
+     * Initializes the paddle by loading the image of the paddle, getting the image dimensions and resetting the
+     * the position of the paddle
+     */
     private void initPaddle(){
         loadImage();
         getImageDimensions();
@@ -18,17 +26,26 @@ public class Paddle extends Sprite{
 
     }
 
+    /**
+     * loads the image of the paddle
+     */
     private void loadImage(){
         var ii = new ImageIcon("src/Resources/paddle__.png");
         image = ii.getImage();
     }
 
+    /**
+     * loads a different image of the paddle to reduce the size of the paddle
+     */
     private void changePaddleSize(){
         var ii = new ImageIcon("src/Resources/short_paddle__.png");
         image = ii.getImage();
 
     }
 
+    /**
+     * moves the paddle to the right or left according to the arrow key that is being pressed
+     */
     public void move(){
         x += dx;
 
@@ -42,6 +59,10 @@ public class Paddle extends Sprite{
 
     }
 
+    /**
+     * gets the key that is being pressed and moves the paddle
+     * @param e
+     */
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
         if(key == KeyEvent.VK_LEFT){
@@ -52,6 +73,10 @@ public class Paddle extends Sprite{
         }
     }
 
+    /**
+     * gets the event when a key is released to stop the movement of the paddle
+     * @param e
+     */
     public void keyReleased(KeyEvent e){
         int key = e.getKeyCode();
         if(key == KeyEvent.VK_LEFT){
@@ -63,6 +88,9 @@ public class Paddle extends Sprite{
         }
     }
 
+    /**
+     * resets the coordinates of the paddle to a initial position determined by the developer
+     */
     private void resetState(){
         x = Commons.INIT_PADDLE_X;
         y = Commons.INIT_PADDLE_Y;
