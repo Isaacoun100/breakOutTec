@@ -1,5 +1,8 @@
 package game_interface;
 
+/**
+ * File of constants used in the game
+ */
 public interface Commons {
 
     int WIDTH = 1000;

@@ -3,12 +3,18 @@ package java_socket;
 import java.net.*;
 import java.io.*;
 
-
+/**
+ * Class that allows to send and receive data through a socket implementing inheritance with the thread class
+ */
 public class GameClient extends Thread{
     public Socket socket;
     public DataInputStream inputBuffer;
     public DataOutputStream outputBuffer;
 
+    /**
+     * connects the client socket with the server socket
+     * sets up the socket in a specific ip address and port
+     */
     public void run(){
         try {
             //Socket is created
@@ -49,6 +55,7 @@ public class GameClient extends Thread{
      */
     public void sendData(String textToSend) {
         try {
+
             //Creates a buffer to send an object
             outputBuffer = new DataOutputStream(socket.getOutputStream());
 
