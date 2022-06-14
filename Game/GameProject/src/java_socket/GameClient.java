@@ -11,6 +11,26 @@ public class GameClient extends Thread{
     public DataInputStream inputBuffer;
     public DataOutputStream outputBuffer;
 
+    private static GameClient single_instance = null;
+
+    /**
+     * Private constructor used in the Singleton design pattern
+     */
+    private GameClient() {
+
+    }
+
+    /**
+     * @author Naheem J.
+     * Method used for calling the single instance of gameclient (used for the Singleton design pattern)
+     * @return Returns single_instance which is the only instance of GameClient
+     */
+    public static GameClient getInstance(){
+        if (single_instance == null)
+            single_instance = new GameClient();
+
+        return single_instance;
+    }
     /**
      * connects the client socket with the server socket
      * sets up the socket in a specific ip address and port
@@ -26,9 +46,9 @@ public class GameClient extends Thread{
             e.printStackTrace();
         }
     }
-    public GameClient() {
 
-    }
+
+
 
     /**
      * Reads the object or string that is sent

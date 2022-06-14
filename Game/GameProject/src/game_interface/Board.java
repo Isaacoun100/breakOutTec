@@ -36,9 +36,6 @@ public class Board extends JPanel{
     private int level = 1;
     private LinkedList<Ball> balls;
 
-    private final GameClient gameClient = new GameClient();
-
-
     public Board() {
         initBoard();
     }
@@ -51,7 +48,10 @@ public class Board extends JPanel{
         addKeyListener(new TAdapter());
         setFocusable(true);
         setPreferredSize(new Dimension(Commons.WIDTH, Commons.HEIGHT));
-        gameClient.start();
+
+        //Using Singleton method
+        GameClient.getInstance().start();
+
         gameInit();
     }
 
