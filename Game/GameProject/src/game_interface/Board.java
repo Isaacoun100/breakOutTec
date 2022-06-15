@@ -73,6 +73,7 @@ public class Board extends JPanel{
         balls = new LinkedList<Ball>();
         balls.add(new Ball());
         balls.add(new Ball());
+        balls.add(new Ball());
         gameLives = balls.size();
 
 
@@ -84,7 +85,7 @@ public class Board extends JPanel{
                 k++;
             }
         }
-        timer = new Timer(Commons.SPEED, new GameCycle());
+        timer = new Timer(10, new GameCycle());
         timer.start();
     }
 

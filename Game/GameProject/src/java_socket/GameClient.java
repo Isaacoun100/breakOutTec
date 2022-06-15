@@ -38,7 +38,7 @@ public class GameClient extends Thread{
     public void run(){
         try {
             //Socket is created
-            socket = new Socket("localhost", 25557);
+            socket = new Socket("localhost", 6969);
             System.out.println("Connected");
             //Waits until all the data has been collected then closes the socket
             socket.setSoLinger(true, 10);
