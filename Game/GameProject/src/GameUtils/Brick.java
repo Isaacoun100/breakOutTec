@@ -1,4 +1,4 @@
-package Objects;
+package GameUtils;
 
 /**
  * @author Naheem J.

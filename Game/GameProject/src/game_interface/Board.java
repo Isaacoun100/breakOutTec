@@ -1,6 +1,10 @@
 package game_interface;
 
+import JSON_Management.TypeConversion;
+import GameUtils.GameDetails;
 import java_socket.GameClient;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -17,8 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  * Board class that applies inheritance of the JPanel class in order to show the graphics of the game
@@ -42,14 +46,65 @@ public class Board extends JPanel{
     private int greenBricks = 0;
     private LinkedList<Ball> balls;
 
+    static GameDetails gameDetails;
+
     public Board() {
         initBoard();
+    }
+
+    public static void updateGameDetails(){
+        try {
+            gameDetails = dataToJSON();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static GameDetails dataToJSON() throws ParseException {
+        JSONObject jsonObject;
+        GameDetails gameDetails;
+        jsonObject  = TypeConversion.stringToJSONObject(GameClient.getInstance().readData());
+        gameDetails = TypeConversion.makeGameDetailsObject(jsonObject);
+        return gameDetails;
     }
 
     /**
      * Initializes the board of the game, starts the thread for the socket and the key listener, sets up configurations previously stated in the Commons Interface
      */
     private void initBoard() {
+
+
+        GameUtils.Brick lifepoints = new GameUtils.Brick();
+        GameUtils.Brick extraBall = new GameUtils.Brick();
+        GameUtils.Brick doubleRacket = new GameUtils.Brick();
+        GameUtils.Brick halfRacket = new GameUtils.Brick();
+        GameUtils.Brick moreSpeed = new GameUtils.Brick();
+        GameUtils.Brick lessSpeed = new GameUtils.Brick();
+
+        lifepoints.setxValue(0);
+        lifepoints.setyValue(7);
+
+        extraBall.setxValue(1);
+        extraBall.setyValue(7);
+
+        doubleRacket.setxValue(2);
+        doubleRacket.setyValue(7);
+
+        halfRacket.setxValue(3);
+        halfRacket.setyValue(7);
+
+        moreSpeed.setxValue(4);
+        moreSpeed.setyValue(7);
+
+        lessSpeed.setxValue(5);
+        lessSpeed.setyValue(7);
+
+        gameDetails = new GameDetails(lifepoints,extraBall,doubleRacket,halfRacket,moreSpeed,lessSpeed);
+
+        gameDetails.setGreenValue(5);
+        gameDetails.setYellowValue(10);
+        gameDetails.setOrangeValue(15);
+        gameDetails.setRedValue(20);
 
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -76,8 +131,6 @@ public class Board extends JPanel{
         balls.add(new Ball());
         gameLives = balls.size();
 
-
-
         int k = 0;
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 14; j++){
@@ -85,7 +138,7 @@ public class Board extends JPanel{
                 k++;
             }
         }
-        timer = new Timer(10, new GameCycle());
+        timer = new Timer(50, new GameCycle());
         timer.start();
     }
 
@@ -204,6 +257,18 @@ public class Board extends JPanel{
         for(int i = 0; i < balls.size(); i++){
             balls.get(i).move();
         }
+
+        for(int i=0; i<Commons.NUMBER_OF_BRICKS; i++){
+            if(Objects.equals(bricks[i].getBrickType(), "RED"))
+                bricks[i].setPoints(gameDetails.getRedValue());
+            if(Objects.equals(bricks[i].getBrickType(), "ORANGE"))
+                bricks[i].setPoints(gameDetails.getOrangeValue());
+            if(Objects.equals(bricks[i].getBrickType(), "YELLOW"))
+                bricks[i].setPoints(gameDetails.getYellowValue());
+            if(Objects.equals(bricks[i].getBrickType(), "GREEN"))
+                bricks[i].setPoints(gameDetails.getGreenValue());
+        }
+
         paddle.move();
 
         checkCollision();
@@ -304,7 +369,7 @@ public class Board extends JPanel{
                         score += bricks[k].getPoints();
                         checkLevel(k);
                         bricks[k].setDestroyed(true);
-                        bricks[k].getBrickCoordinates();
+                        GameClient.getInstance().sendData(bricks[k].getBrickCoordinates());
 
                     }
 

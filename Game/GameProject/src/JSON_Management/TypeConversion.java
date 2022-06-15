@@ -1,7 +1,7 @@
 package JSON_Management;
 
-import Objects.Brick;
-import Objects.GameDetails;
+import GameUtils.Brick;
+import GameUtils.GameDetails;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

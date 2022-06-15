@@ -1,7 +1,10 @@
 package java_socket;
 
+import game_interface.Board;
+
 import java.net.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Class that allows to send and receive data through a socket implementing inheritance with the thread class
@@ -41,10 +44,17 @@ public class GameClient extends Thread{
             socket = new Socket("localhost", 6969);
             System.out.println("Connected");
             //Waits until all the data has been collected then closes the socket
-            socket.setSoLinger(true, 10);
+            System.out.println(readData());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        int e=0;
+
+        while(e<1)
+            Board.updateGameDetails();
+
     }
 
 
@@ -52,19 +62,26 @@ public class GameClient extends Thread{
     /**
      * Reads the object or string that is sent
      */
-    public void readData() {
+    public String readData() {
+
+        int read = -1;
+
+        byte [] buffer = new byte[5*1024], obtainData;
+
         try {
-            //Gets a read only stream to read objects
-            inputBuffer = new DataInputStream(socket.getInputStream());
-            //Creates a socketData and reads what it was sent from C
-            SocketData data = new SocketData("");
-            data.readObject(inputBuffer);
 
-            System.out.println("Java Client: Received " + data.toString());
+            if((read=socket.getInputStream().read(buffer))>-1){
+                obtainData = new byte[read];
+                System.arraycopy(buffer,0,obtainData,0,read);
+                return new String(obtainData, StandardCharsets.UTF_8);
+            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+        return null;
+
     }
 
     /**
@@ -82,7 +99,7 @@ public class GameClient extends Thread{
             SocketData aux = new SocketData(textToSend);
             aux.writeObject(outputBuffer);
             System.out.println("Java Client: Sent " + aux.toString());
-            socket.close();
+            //socket.close();
 
 
         } catch (Exception e) {

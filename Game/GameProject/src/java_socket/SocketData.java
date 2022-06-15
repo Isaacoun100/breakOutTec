@@ -45,26 +45,4 @@ public class SocketData implements Serializable{
 
     }
 
-    /**
-     * Method that reads the attributes of this class in a DataInputStream as they are sent by the program in C
-     * @param in
-     * @throws IOException
-     */
-    public void readObject(DataInputStream in) throws IOException{
-        //Reads the length of the text and it substracts 1 to delete the '\0' that is sent by C
-        c = in.readInt() -1;
-        //Array in bytes to read the text
-        byte [] aux = null;
-
-        //gives the size of the array
-        aux = new byte[c];
-
-        //bytes are read
-        in.read(aux,0,c);
-        //Converts bytes into a string
-        d = new String(aux);
-        //reads the '\0'
-        in.read(aux,0,1);
-    }
-
 }

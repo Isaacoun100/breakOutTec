@@ -3,7 +3,8 @@ import java_socket.GameClient;
 
 import java.awt.*;
 
-public class GameMain{
+public class GameMain extends Thread{
+
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {

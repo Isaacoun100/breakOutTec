@@ -54,6 +54,8 @@ int startConnection(){
         return 1;
     }
 
+    sendMessage("Connection succeeded");
+
     return 0;
 }
 

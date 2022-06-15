@@ -60,7 +60,7 @@ const char* convertJSON(struct gameDetails newGame){
                   "    \"orangeValue\": %d,\n"
                   "    \"redValue\": %d,\n"
                   "    \"lifePoints\":[%d,%d],\n"
-                  "    \"extraValue\":[%d,%d],\n"
+                  "    \"extraBall\":[%d,%d],\n"
                   "    \"doubleRacket\":[%d,%d],\n"
                   "    \"halfRacket\":[%d,%d],\n"
                   "    \"moreSpeed\":[%d,%d],\n"
@@ -89,9 +89,8 @@ int startConsole(){
 
     int newValue,       // Response writen in the CLI
         PORT = 6969;    // Default server port if none was indicated
-    bool isFirst,       // Indicates if is the first time the user writes Send
-        hasStarted,     // Indicates if the game has already started
-        isObserving;    // Indicates if the observer has already been created
+    bool hasStarted,     // Indicates if the game has already started
+         isObserving;    // Indicates if the observer has already been created
     char command[128];  // Message writen in the CLI
 
     struct gameDetails newGame;
@@ -142,6 +141,7 @@ int startConsole(){
                 "SlowerBrick         →   To add a less speed bonus\n"
                 "Send                →   To send the data and start the game \n"
                 "Observer            →   Starts the connection with the Observer\n"
+                "OpenSocket          →   Initializes the connection\n"
                 "Status              →   Retrieves the data of the current game \n"
                 "Help                →   To read the instructions again \n" ,
 
@@ -307,22 +307,22 @@ int startConsole(){
             }
         }
 
+        else if(strcmp(command,"OpenSocket")==0){
+            startConnection();
+            printf("Connection started\n");
+            hasStarted=true;
+        }
+
         // Sends through the socket the JSON
         else if(strcmp(command,"Send")==0){
 
             char* settings = convertJSON(newGame);
 
-            if(!isFirst){
-                printf("The game server will be hosted in 6969\n%s\n",settings);
-                startConnection();
-                sleep(1);
+            if(hasStarted)
                 sendMessage(settings);
-                isFirst=hasStarted=true;
-            }
-            else{
-                printf("%s \n",settings);
-                sendMessage(settings);
-            }
+            else
+                printf("Server has not started\n");
+
         }
 
         // Give the instructions
