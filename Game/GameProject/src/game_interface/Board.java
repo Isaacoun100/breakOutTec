@@ -23,6 +23,7 @@ import java.util.LinkedList;
 /**
  * Board class that applies inheritance of the JPanel class in order to show the graphics of the game
  * it also contains the game logic and the socket architecture that allows to read and send messages from/to the server
+ * @author Michael Valverde
  */
 public class Board extends JPanel{
     private Timer timer;

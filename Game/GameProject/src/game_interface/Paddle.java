@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 
 /**
  * Paddle class that applies inheritance to the sprite superclass to make a paddle for controlling the game
+ * @author Michael Valverde
  */
 public class Paddle extends Sprite{
 

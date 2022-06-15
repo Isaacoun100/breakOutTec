@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 /**
  * Breakout class that triggers the initialization of the game
+ * @author Michael Valverde
  */
 public class Breakout extends JFrame{
 

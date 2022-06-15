@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 
 /**
  * Super class Sprite, allows representation of a paddle, bricks, and balls inside the game
- *
+ * @author Michael Valverde
  */
 public class Sprite {
 

@@ -6,6 +6,7 @@ import java.awt.*;
 
 /**
  * Brick class that applies inheritance to the sprite superclass to make bricks for the game
+ * @author Michael Valverde
  */
 public class Brick extends Sprite{
 

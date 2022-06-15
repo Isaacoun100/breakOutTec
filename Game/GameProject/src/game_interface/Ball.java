@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 
 /**
  * Class ball the applies inheritance to the sprite class
+ * @author Michael Valverde
  */
 public class Ball extends Sprite{
     private int xdir;
@@ -88,7 +89,7 @@ public class Ball extends Sprite{
 
     /**
      * gets the direction for the y-axis
-     * @return
+     * @return integer that represents the y direction
      */
     int getYDir() {
 

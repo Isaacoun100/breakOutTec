@@ -49,7 +49,6 @@ public class GameClient extends Thread{
 
 
 
-
     /**
      * Reads the object or string that is sent
      */
