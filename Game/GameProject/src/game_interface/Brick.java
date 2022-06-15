@@ -98,7 +98,7 @@ public class Brick extends Sprite{
      * Checks if the brick is destroyed
      * @return true if the brick is destroyed, false if the brick remains in the game
      */
-    boolean isDestroyed(){
+    public boolean isDestroyed(){
         return destroyed;
     }
 

@@ -45,6 +45,7 @@ public class Board extends JPanel{
     private int yellowBricks = 0;
     private int greenBricks = 0;
     private LinkedList<Ball> balls;
+    private String messageToOberver;
 
     static GameDetails gameDetails;
 
@@ -72,8 +73,6 @@ public class Board extends JPanel{
      * Initializes the board of the game, starts the thread for the socket and the key listener, sets up configurations previously stated in the Commons Interface
      */
     private void initBoard() {
-
-
         GameUtils.Brick lifepoints = new GameUtils.Brick();
         GameUtils.Brick extraBall = new GameUtils.Brick();
         GameUtils.Brick doubleRacket = new GameUtils.Brick();
@@ -161,7 +160,6 @@ public class Board extends JPanel{
             gameFinished(g2d);
         }
         Toolkit.getDefaultToolkit().sync();
-
     }
 
     /**
@@ -402,16 +400,19 @@ public class Board extends JPanel{
                             balls.get(i).setSpeed(1);
                         }
 
+                        messageToOberver = "{\n" +
+                                "  \"Score\":"+score+",\n" +
+                                "  \"Lifes\":"+gameLives+",\n" +
+                                "  \"Level\":"+level+",\n" +
+                                "  \"DestroyedBrick\":" +"[" +bricks[k].getRow()+","+bricks[k].getColumn()+"]\n" +
+                                "}";
                         bricks[k].setDestroyed(true);
+                        System.out.println(messageToOberver);
                         GameClient.getInstance().sendData(bricks[k].getBrickCoordinates());
-
                     }
-
                 }
             }
         }
-
-
     }
 
     private void checkLevel(int index){

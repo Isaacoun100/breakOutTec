@@ -25,7 +25,7 @@ public class Sprite {
      * obtiene el valor de la coordenada en x
      * @return value in x-axis
      */
-    int getX(){
+    public int getX(){
         return x;
     }
 
@@ -41,7 +41,7 @@ public class Sprite {
      * Gets the value in y-axis
      * @return value in y-axis
      */
-    int getY(){
+    public int getY(){
         return y;
     }
 
@@ -49,7 +49,7 @@ public class Sprite {
      * Gets the width of the image used to represent an object like a paddle, brick or ball
      * @return width of the given image
      */
-    int getImageWidth(){
+    public int getImageWidth(){
         return imageWidth;
     }
 
@@ -57,7 +57,7 @@ public class Sprite {
      * Gets the height of the image used to represent an object like a paddle, brick or ball
      * @return height of the given image
      */
-    int getImageHeight(){
+    public int getImageHeight(){
         return imageHeight;
     }
 
@@ -65,7 +65,7 @@ public class Sprite {
      * Gets the image used to represent an object from the game
      * @return image
      */
-    Image getImage(){
+    public Image getImage(){
         return image;
     }
 

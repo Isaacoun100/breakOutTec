@@ -1,4 +1,5 @@
 import game_interface.Breakout;
+import game_observer.ObserverTrigger;
 import java_socket.GameClient;
 
 import java.awt.*;
@@ -11,6 +12,8 @@ public class GameMain extends Thread{
 
             var game = new Breakout();
             game.setVisible(true);
+            //var game_observer = new ObserverTrigger();
+            //game_observer.setVisible(true);
         });
     }
 }
