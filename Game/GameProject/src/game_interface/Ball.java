@@ -41,21 +41,24 @@ public class Ball extends Sprite{
      * allows to move the ball in any direction
      */
     public void move(){
-        x += xdir;
-        y += ydir;
+        if(!destroyed){
+            x += xdir;
+            y += ydir;
 
-        if(x == 0){
-            setXDir(3);
+            if(x == 0){
+                setXDir(3);
 
-        }
-        if(x == Commons.WIDTH - imageWidth){
-            System.out.println(imageWidth);
-            setXDir(-3);
+            }
+            if(x == Commons.WIDTH - imageWidth){
+                System.out.println(imageWidth);
+                setXDir(-3);
 
-        }
+            }
 
-        if(y == 0){
-            setYDir(3);
+            if(y == 0){
+                setYDir(3);
+            }
+
         }
 
     }

@@ -25,6 +25,7 @@ import java.util.LinkedList;
  * it also contains the game logic and the socket architecture that allows to read and send messages from/to the server
  * @author Michael Valverde
  */
+
 public class Board extends JPanel{
     private Timer timer;
     private String message = "Game Over";
@@ -32,9 +33,9 @@ public class Board extends JPanel{
     private Paddle paddle;
     private Brick[] bricks;
     private boolean inGame = true;
-    private LinkedList<Integer> lives;
     private int score = 0;
     private int level = 1;
+    private int gameLives;
     private LinkedList<Ball> balls;
 
     public Board() {
@@ -68,11 +69,8 @@ public class Board extends JPanel{
         balls = new LinkedList<Ball>();
         balls.add(new Ball());
         balls.add(new Ball());
+        gameLives = balls.size();
 
-        lives = new LinkedList<Integer>();
-        lives.add(1);
-        lives.add(2);
-        System.out.println("Size of balls list " + lives.size());
 
 
         int k = 0;
@@ -156,7 +154,7 @@ public class Board extends JPanel{
         g2d.setColor(Color.BLACK);
         g2d.setFont(font);
         g2d.drawString("Score: " + String.valueOf(score), (Commons.WIDTH - fontMetrics.stringWidth(String.valueOf(score)))/2, 20);
-        g2d.drawString("Lives: " + String.valueOf(lives.size()), (Commons.WIDTH - fontMetrics.stringWidth(String.valueOf(lives)))/3, 20);
+        g2d.drawString("Lives: " + String.valueOf(gameLives), (Commons.WIDTH - fontMetrics.stringWidth(String.valueOf(gameLives)))/3, 20);
         g2d.drawString("Level: " + String.valueOf(level), (Commons.WIDTH - fontMetrics.stringWidth(String.valueOf(level)))/5, 20);
     }
 
@@ -222,8 +220,12 @@ public class Board extends JPanel{
     private void checkCollision(){
         for(int i = 0; i < balls.size(); i++){
             if(balls.get(i).getRectangle().getMaxY() > Commons.BOTTOM_EDGE){
-                //stopGame();
+                balls.get(i).setY(0);
                 balls.get(i).setDestroyed(true);
+                gameLives -= 1;
+                if(gameLives <= 0){
+                    stopGame();
+                }
             }
 
             for(int m = 0, j = 0; m < Commons.NUMBER_OF_BRICKS; m++){
@@ -294,6 +296,7 @@ public class Board extends JPanel{
                             balls.get(i).setYDir(-1);
                         }
 
+                        score += bricks[k].getPoints();
                         bricks[k].setDestroyed(true);
                         //balls.add(new Ball());
                         bricks[k].getBrickCoordinates();

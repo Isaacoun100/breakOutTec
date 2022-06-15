@@ -33,7 +33,7 @@ public class Brick extends Sprite{
         this.y = y;
         this.row = row;
         this.column = column;
-        this.points = 0;
+        this.points = 5;
         destroyed = false;
         loadImage();
         getImageDimensions();
