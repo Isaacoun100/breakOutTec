@@ -11,6 +11,7 @@ public class Ball extends Sprite{
     private int xdir;
     private int ydir;
     private boolean destroyed;
+    private int speed = 1;
 
 
     public Ball(){
@@ -42,8 +43,8 @@ public class Ball extends Sprite{
      */
     public void move(){
         if(!destroyed){
-            x += xdir;
-            y += ydir;
+            x += xdir * speed;
+            y += ydir * speed;
 
             if(x == 0){
                 setXDir(3);
@@ -56,7 +57,7 @@ public class Ball extends Sprite{
             }
 
             if(y == 0){
-                setYDir(3);
+                setYDir(3 * 5);
             }
 
         }
@@ -114,5 +115,13 @@ public class Ball extends Sprite{
      */
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }

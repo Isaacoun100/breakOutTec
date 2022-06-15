@@ -267,6 +267,20 @@ public class Board extends JPanel{
                 bricks[i].setPoints(gameDetails.getYellowValue());
             if(Objects.equals(bricks[i].getBrickType(), "GREEN"))
                 bricks[i].setPoints(gameDetails.getGreenValue());
+
+            if(gameDetails.getLifepoints().getxValue() == bricks[i].getRow() && gameDetails.getLifepoints().getyValue() == bricks[i].getColumn()){
+                bricks[i].setPowerUp("BALL");
+            }else if(gameDetails.getExtraBall().getxValue() == bricks[i].getRow() && gameDetails.getExtraBall().getyValue() == bricks[i].getColumn()){
+                bricks[i].setPowerUp("BALL");
+            }else if(gameDetails.getDoubleRacket().getxValue() == bricks[i].getRow() && gameDetails.getDoubleRacket().getyValue() == bricks[i].getColumn()){
+                bricks[i].setPowerUp("NORMAL_RACKET");
+            }else if(gameDetails.getHalfRacket().getxValue() == bricks[i].getRow() && gameDetails.getHalfRacket().getyValue() == bricks[i].getColumn()){
+                bricks[i].setPowerUp("HALF_RACKET");
+            }else if (gameDetails.getMoreSpeed().getxValue() == bricks[i].getRow() && gameDetails.getMoreSpeed().getyValue() == bricks[i].getColumn()){
+                bricks[i].setPowerUp("MORE_SPEED");
+            }else if(gameDetails.getLessSpeed().getxValue() == bricks[i].getRow() && gameDetails.getLessSpeed().getyValue() == bricks[i].getColumn()){
+                bricks[i].setPowerUp("LESS_SPEED");
+            }
         }
 
         paddle.move();
@@ -367,7 +381,21 @@ public class Board extends JPanel{
                         }
 
                         score += bricks[k].getPoints();
+
                         checkLevel(k);
+
+                        if(bricks[k].getPowerUp() == "BALL"){
+                            balls.add(new Ball());
+                        }else if(bricks[k].getPowerUp() == "NORMAL_RACKET"){
+                            paddle.changePaddleSize("NORMAL");
+                        }else if (bricks[k].getPowerUp() == "HALF_RACKET"){
+                            paddle.changePaddleSize("LITTLE");
+                        }else if(bricks[k].getPowerUp() == "MORE_SPEED"){
+                            balls.get(i).setSpeed(2);
+                        }else if(bricks[k].getPowerUp() == "LESS_SPEED"){
+                            balls.get(i).setSpeed(1);
+                        }
+
                         bricks[k].setDestroyed(true);
                         GameClient.getInstance().sendData(bricks[k].getBrickCoordinates());
 
@@ -394,6 +422,7 @@ public class Board extends JPanel{
             System.out.println("yellow bricks " + yellowBricks);
         }else if(brickType == "GREEN"){
             greenBricks += 1;
+
             System.out.println("green bricks " + greenBricks);
         }
 

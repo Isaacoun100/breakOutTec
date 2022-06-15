@@ -38,9 +38,17 @@ public class Paddle extends Sprite{
     /**
      * loads a different image of the paddle to reduce the size of the paddle
      */
-    private void changePaddleSize(){
-        var ii = new ImageIcon("src/Resources/short_paddle__.png");
-        image = ii.getImage();
+    public void changePaddleSize(String state){
+        if(state == "LITTLE"){
+            var ii = new ImageIcon("src/Resources/short_paddle__.png");
+            image = ii.getImage();
+            getImageDimensions();
+        }else{
+            var ii = new ImageIcon("src/Resources/paddle__.png");
+            image = ii.getImage();
+            getImageDimensions();
+        }
+
 
     }
 
