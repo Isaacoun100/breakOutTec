@@ -22,8 +22,8 @@ public class Ball extends Sprite{
      * method that allows to initialize a ball
      */
     private void initBall(){
-        xdir = 1;
-        ydir = -1;
+        xdir = 3;
+        ydir = -3;
         destroyed = false;
         loadImage();
         getImageDimensions();
@@ -57,7 +57,7 @@ public class Ball extends Sprite{
             }
 
             if(y == 0){
-                setYDir(3 * 5);
+                setYDir(3);
             }
 
         }

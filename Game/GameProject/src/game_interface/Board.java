@@ -138,7 +138,7 @@ public class Board extends JPanel{
                 k++;
             }
         }
-        timer = new Timer(50, new GameCycle());
+        timer = new Timer(20, new GameCycle());
         timer.start();
     }
 
@@ -336,20 +336,20 @@ public class Board extends JPanel{
                     int fourth = paddlePos + 32;
 
                     if(ballPos < first){
-                        balls.get(i).setXDir(-1);
-                        balls.get(i).setYDir(-1);
+                        balls.get(i).setXDir(-3);
+                        balls.get(i).setYDir(-3);
                     }
                     if(ballPos >= second && ballPos < third){
                         balls.get(i).setXDir(0);
-                        balls.get(i).setYDir(-1);
+                        balls.get(i).setYDir(-3);
                     }
                     if(ballPos >= third && ballPos < fourth){
-                        balls.get(i).setXDir(1);
-                        balls.get(i).setYDir(-1 * balls.get(i).getYDir());
+                        balls.get(i).setXDir(3);
+                        balls.get(i).setYDir(-3 * balls.get(i).getYDir());
                     }
                     if(ballPos > fourth){
-                        balls.get(i).setXDir(1);
-                        balls.get(i).setYDir(-1);
+                        balls.get(i).setXDir(3);
+                        balls.get(i).setYDir(-3);
                     }
                 }
             }
@@ -386,7 +386,7 @@ public class Board extends JPanel{
 
                         if(bricks[k].getPowerUp() == "BALL"){
                             balls.add(new Ball());
-                            gameLives = balls.size();
+                            gameLives--;
                         }else if(bricks[k].getPowerUp() == "NORMAL_RACKET"){
                             paddle.changePaddleSize("NORMAL");
                         }else if (bricks[k].getPowerUp() == "HALF_RACKET"){
