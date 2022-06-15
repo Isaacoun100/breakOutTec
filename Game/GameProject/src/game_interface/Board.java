@@ -335,19 +335,25 @@ public class Board extends JPanel{
                     int third = paddlePos + 24;
                     int fourth = paddlePos + 32;
 
-                    if(ballPos < first){
+                    if((int) balls.get(i).getRectangle().getMinX() < first){
+                        System.out.println("First " + first);
                         balls.get(i).setXDir(-3);
                         balls.get(i).setYDir(-3);
                     }
-                    if(ballPos >= second && ballPos < third){
+                    if((int) balls.get(i).getRectangle().getMinX() >= second && ballPos < third){
+                        System.out.println("Second " + second);
+                        System.out.println("Third "  + third);
                         balls.get(i).setXDir(0);
                         balls.get(i).setYDir(-3);
                     }
-                    if(ballPos >= third && ballPos < fourth){
+                    if((int) balls.get(i).getRectangle().getMinX() >= third && ballPos < fourth){
+                        System.out.println("Third "  + third);
+                        System.out.println("Fourth" + fourth);
                         balls.get(i).setXDir(3);
                         balls.get(i).setYDir(-3 * balls.get(i).getYDir());
                     }
-                    if(ballPos > fourth){
+                    if((int) balls.get(i).getRectangle().getMinX()> fourth){
+                        System.out.println("Fourth" + fourth);
                         balls.get(i).setXDir(3);
                         balls.get(i).setYDir(-3);
                     }
@@ -381,12 +387,11 @@ public class Board extends JPanel{
                         }
 
                         score += bricks[k].getPoints();
-
                         checkLevel(k);
 
                         if(bricks[k].getPowerUp() == "BALL"){
                             balls.add(new Ball());
-                            gameLives--;
+                            gameLives += 1;
                         }else if(bricks[k].getPowerUp() == "NORMAL_RACKET"){
                             paddle.changePaddleSize("NORMAL");
                         }else if (bricks[k].getPowerUp() == "HALF_RACKET"){
@@ -423,7 +428,6 @@ public class Board extends JPanel{
             System.out.println("yellow bricks " + yellowBricks);
         }else if(brickType == "GREEN"){
             greenBricks += 1;
-
             System.out.println("green bricks " + greenBricks);
         }
 

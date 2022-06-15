@@ -46,17 +46,19 @@ public class Ball extends Sprite{
             x += xdir * speed;
             y += ydir * speed;
 
-            if(x == 0){
+            if(x <= 0){
                 setXDir(3);
 
+
             }
-            if(x == Commons.WIDTH - imageWidth){
-                System.out.println(imageWidth);
+            if(x >= 985){
+                System.out.println(Commons.WIDTH - imageWidth);
                 setXDir(-3);
 
             }
 
-            if(y == 0){
+            if(y <= 5){
+                System.out.println(y);
                 setYDir(3);
             }
 
