@@ -2,6 +2,7 @@ package game_interface;
 
 import javax.swing.ImageIcon;
 import java.awt.*;
+import java.beans.beancontext.BeanContextServiceRevokedEvent;
 
 
 /**
@@ -14,6 +15,7 @@ public class Brick extends Sprite{
     private int row;
     private int column;
     private String powerUp;
+    private String brickType;
     private int points;
 
 
@@ -50,34 +52,43 @@ public class Brick extends Sprite{
             case 0:
                 var ii = new ImageIcon("src/Resources/red_brick__.png");
                 image = ii.getImage();
+                brickType = "RED";
                 break;
             case 1:
                 ii = new ImageIcon("src/Resources/red_brick__.png");
                 image = ii.getImage();
+                brickType = "RED";
                 break;
             case 2:
                 ii = new ImageIcon("src/Resources/orange_brick__.png");
                 image = ii.getImage();
+                brickType = "ORANGE";
                 break;
             case 3:
                 ii = new ImageIcon("src/Resources/orange_brick__.png");
                 image = ii.getImage();
+                brickType = "ORANGE";
                 break;
             case 4:
                 ii = new ImageIcon("src/Resources/yellow_brick__.png");
                 image = ii.getImage();
+                brickType = "YELLOW";
                 break;
             case 5:
                 ii = new ImageIcon("src/Resources/yellow_brick__.png");
                 image = ii.getImage();
+                brickType = "YELLOW";
                 break;
             case 6:
                 ii = new ImageIcon("src/Resources/green_brick__.png");
                 image = ii.getImage();
+                brickType = "GREEN";
                 break;
             case 7:
                 ii = new ImageIcon("src/Resources/green_brick__.png");
                 image = ii.getImage();
+                brickType = "GREEN";
+                break;
 
 
         }
@@ -170,5 +181,13 @@ public class Brick extends Sprite{
      */
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    /**
+     * Gets the brick type of the object
+     * @return string that represents the brick type
+     */
+    public String getBrickType() {
+        return brickType;
     }
 }

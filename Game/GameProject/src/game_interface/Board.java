@@ -36,6 +36,10 @@ public class Board extends JPanel{
     private int score = 0;
     private int level = 1;
     private int gameLives;
+    private int redBricks = 0;
+    private int orangeBricks = 0;
+    private int yellowBricks = 0;
+    private int greenBricks = 0;
     private LinkedList<Ball> balls;
 
     public Board() {
@@ -297,8 +301,8 @@ public class Board extends JPanel{
                         }
 
                         score += bricks[k].getPoints();
+                        checkLevel(k);
                         bricks[k].setDestroyed(true);
-                        //balls.add(new Ball());
                         bricks[k].getBrickCoordinates();
 
                     }
@@ -307,6 +311,35 @@ public class Board extends JPanel{
             }
         }
 
+
+    }
+
+    private void checkLevel(int index){
+
+        String brickType = bricks[index].getBrickType();
+        if(brickType == "RED"){
+            redBricks += 1;
+            System.out.println("Red bricks " + redBricks);
+        }else if(brickType == "ORANGE"){
+            orangeBricks += 1;
+            System.out.println("orange bricks " + orangeBricks);
+        }else if(brickType == "YELLOW"){
+            yellowBricks += 1;
+            System.out.println("yellow bricks " + yellowBricks);
+        }else if(brickType == "GREEN"){
+            greenBricks += 1;
+            System.out.println("green bricks " + greenBricks);
+        }
+
+        if(redBricks == Commons.RED_BRICKS){
+            level += 1;
+        }else if(orangeBricks == Commons.ORANGE_BRICKS){
+            level += 1;
+        }else if(yellowBricks == Commons.YELLOW_BRICKS){
+            level += 1;
+        }else if(greenBricks == Commons.GREEN_BRICKS){
+            level += 1;
+        }
 
     }
 

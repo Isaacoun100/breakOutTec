@@ -14,5 +14,9 @@ public interface Commons {
     int INIT_BALL_X = 500;
     int INIT_BALL_Y = 500;
     int SPEED = 1;
+    int RED_BRICKS = 28;
+    int ORANGE_BRICKS = 28;
+    int YELLOW_BRICKS = 28;
+    int GREEN_BRICKS = 28;
 
 }
