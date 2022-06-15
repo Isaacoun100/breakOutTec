@@ -386,6 +386,7 @@ public class Board extends JPanel{
 
                         if(bricks[k].getPowerUp() == "BALL"){
                             balls.add(new Ball());
+                            gameLives += 1;
                         }else if(bricks[k].getPowerUp() == "NORMAL_RACKET"){
                             paddle.changePaddleSize("NORMAL");
                         }else if (bricks[k].getPowerUp() == "HALF_RACKET"){
